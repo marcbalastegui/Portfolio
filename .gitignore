@@ -1,0 +1,13 @@
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+*.code-workspace
+
+# Temporales
+*.tmp
+*.bak
+*~

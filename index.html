@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marc Balastegui</title>
+<meta name="description" content="Sistemas, cine y notas a medio pensar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Karla:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300..400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --bg-2:#F7F7F6;
+  --ink:#121317;
+  --ink-soft:#6A6E76;
+  --line:#E4E4E1;
+  --line-strong:#15161A;
+  --accent:#1C2B46;
+  --display:"Bodoni Moda",Didot,Georgia,serif;
+  --ui:"Karla","Helvetica Neue",Arial,sans-serif;
+  --read:"Newsreader",Georgia,serif;
+  --gutter:clamp(20px,5vw,76px);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--ui);font-size:16.5px;line-height:1.6;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ink);color:#fff}
+:focus-visible{outline:1.5px solid var(--accent);outline-offset:4px}
+
+/* ---------- cabecera ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px var(--gutter);
+  background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:500;font-size:21px;letter-spacing:.01em;
+  text-decoration:none;color:inherit;line-height:1;
+}
+.nav{display:flex;gap:2px}
+.nav button{
+  font-family:var(--ui);font-size:13px;font-weight:500;letter-spacing:.02em;
+  background:none;border:0;color:var(--ink-soft);
+  padding:8px 12px;cursor:pointer;position:relative;
+  transition:color .2s ease;
+}
+.nav button::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:2px;height:1px;
+  background:var(--ink);transform:scaleX(0);transform-origin:left;
+  transition:transform .25s cubic-bezier(.22,.61,.36,1);
+}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-current="true"]{color:var(--ink)}
+.nav button[aria-current="true"]::after{transform:scaleX(1)}
+
+main{padding:0 var(--gutter) 120px}
+.view{display:none;max-width:1180px;margin:0 auto}
+.view.is-active{display:block;animation:enter .45s cubic-bezier(.22,.61,.36,1) both}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- tipografia ---------- */
+h1{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:500;font-size:clamp(42px,7vw,86px);
+  line-height:1.03;letter-spacing:-.015em;margin:0 0 26px;text-wrap:balance;
+}
+h2{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:500;font-size:clamp(23px,2.8vw,31px);
+  line-height:1.16;letter-spacing:-.008em;margin:0 0 10px;
+}
+h3{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:500;font-size:19px;line-height:1.2;margin:0 0 8px;
+}
+p{margin:0 0 18px;max-width:62ch}
+.lead{font-size:clamp(18px,2vw,21px);line-height:1.55;color:var(--ink-soft);font-weight:300}
+.eyebrow{
+  display:block;font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-soft);
+  padding-top:64px;margin:0 0 24px;
+}
+.view > .eyebrow:first-child{padding-top:46px}
+.rule{height:1px;background:var(--line);margin:0 0 34px}
+
+/* ---------- inicio ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.85fr);gap:clamp(28px,5vw,70px);align-items:end;padding-top:56px}
+.hero .lead{max-width:44ch}
+.portrait{display:block;position:relative;aspect-ratio:4/5;background:var(--bg-2);border:1px solid var(--line);overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:500;
+  letter-spacing:.02em;color:var(--ink-soft);margin-bottom:22px;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-top:1px solid var(--line)}
+.door{
+  display:block;text-align:left;width:100%;cursor:pointer;font:inherit;color:inherit;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  padding:26px 24px 26px 0;position:relative;
+  transition:padding .3s cubic-bezier(.22,.61,.36,1);
+}
+.door:hover{padding-left:12px}
+.door p{font-size:15px;margin:0;color:var(--ink-soft);max-width:34ch}
+.door h3{margin-bottom:6px}
+.doors .door + .door{padding-left:24px}
+.doors .door + .door:hover{padding-left:36px}
+
+/* ---------- sobre mi ---------- */
+.split{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,5vw,76px);align-items:start}
+.split p{font-family:var(--read);font-size:18.5px;line-height:1.7;font-weight:300}
+.split .lead{font-family:var(--ui)}
+.facts{font-size:13.5px;line-height:1.5}
+.facts dl{margin:0}
+.facts div{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts div:first-child{border-top:1px solid var(--line-strong)}
+.facts dt{color:var(--ink);font-weight:600;min-width:84px;flex-shrink:0;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding-top:3px}
+.facts dd{margin:0;color:var(--ink-soft)}
+.facts a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.facts a:hover{border-bottom-color:var(--ink)}
+
+/* ---------- proyectos ---------- */
+.rows{border-top:1px solid var(--line-strong)}
+.row{
+  display:grid;grid-template-columns:270px minmax(0,1fr);gap:clamp(22px,4vw,54px);
+  align-items:start;text-align:left;width:100%;font:inherit;color:inherit;
+  text-decoration:none;background:none;border:0;border-bottom:1px solid var(--line);
+  padding:30px 0;cursor:pointer;
+}
+.thumb{
+  display:block;position:relative;aspect-ratio:4/3;
+  background:var(--bg-2);border:1px solid var(--line);overflow:hidden;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.row:hover .thumb img{transform:scale(1.04)}
+.thumb .hint{
+  position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#B9BBBE;
+}
+.row-top{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:4px}
+.row h2{margin:0;transition:opacity .2s ease}
+.row:hover h2{opacity:.6}
+.row p{margin:8px 0 16px;color:var(--ink-soft);font-size:15.5px;max-width:56ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);padding:4px 10px;color:var(--ink-soft)}
+.year{font-size:12px;color:var(--ink-soft);flex-shrink:0;letter-spacing:.06em}
+
+/* ---------- notas: cuadrados ---------- */
+.aviso{
+  max-width:56ch;margin:0 0 42px;font-family:var(--read);
+  font-size:18px;line-height:1.6;color:var(--ink-soft);font-weight:300;font-style:italic;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}
+.sq{
+  position:relative;aspect-ratio:1/1;overflow:hidden;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  text-align:left;font:inherit;color:var(--ink);
+  background:var(--bg-2);border:1px solid var(--line);
+  padding:18px;transition:border-color .3s ease,transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.sq .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+.sq .veil{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(255,255,255,.88) 0%,rgba(255,255,255,.93) 55%,rgba(255,255,255,.97) 100%);
+  transition:opacity .35s ease}
+.sq .kicker,.sq .fecha,.sq h3,.sq .sub{position:relative;z-index:2}
+.sq:hover{transform:translateY(-4px);border-color:var(--ink)}
+.sq:hover .veil{opacity:.82}
+.sq:hover .bgimg{transform:scale(1.05)}
+.sq .kicker{
+  position:absolute;top:18px;left:18px;
+  font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+}
+.sq .fecha{
+  position:absolute;top:18px;right:18px;font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft);
+}
+.sq h3{font-size:clamp(17px,2vw,20px);line-height:1.18;margin:0 0 7px}
+.sq .sub{font-size:13px;line-height:1.42;color:var(--ink-soft);margin:0}
+
+/* ---------- articulo ---------- */
+.article-head{max-width:68ch;margin:0 auto}
+#view-nota h1{font-size:clamp(34px,5.2vw,62px);margin-bottom:18px}
+.byline{
+  font-size:12.5px;color:var(--ink-soft);letter-spacing:.04em;
+  display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;
+  padding:15px 0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);
+  margin-bottom:46px;
+}
+.byline .mark{color:var(--ink);font-weight:600}
+.article-body{
+  max-width:68ch;margin:0 auto;
+  font-family:var(--read);font-weight:300;font-size:19.5px;line-height:1.72;
+}
+.article-body p{max-width:none}
+.article-body p:first-of-type::first-letter{
+  font-family:var(--display);font-weight:500;
+  font-size:3.3em;line-height:.8;float:left;margin:8px 12px 0 0;
+}
+.article-body figure{margin:46px 0}
+.article-body figure.wide{width:min(94vw,1000px);margin-left:50%;transform:translateX(-50%)}
+.frame{display:block;position:relative;overflow:hidden;aspect-ratio:3/2;background:var(--bg-2);border:1px solid var(--line)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{
+  font-family:var(--ui);font-size:12.5px;color:var(--ink-soft);
+  margin-top:10px;line-height:1.5;max-width:50ch;
+}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.article-body blockquote{
+  margin:46px auto;padding:0;max-width:22ch;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(24px,3.4vw,34px);line-height:1.22;letter-spacing:-.01em;
+  text-align:center;color:var(--ink);
+}
+.article-body h2{margin:48px 0 12px}
+.back{
+  font-size:12.5px;font-weight:500;letter-spacing:.04em;color:var(--ink-soft);
+  background:none;border:0;padding:42px 0 28px;cursor:pointer;
+}
+.back:hover{color:var(--ink)}
+.endnote{
+  max-width:68ch;margin:60px auto 0;padding-top:20px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--ink-soft);
+}
+
+footer{
+  padding:24px var(--gutter) 46px;font-size:12px;color:var(--ink-soft);
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
+  max-width:1180px;margin:0 auto;border-top:1px solid var(--line);
+}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr;align-items:start}
+  .portrait{max-width:280px;order:-1;margin-bottom:10px}
+  .split{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:16px}
+  .thumb{max-width:360px}
+  .doors .door + .door{padding-left:0}
+  .doors .door + .door:hover{padding-left:12px}
+  .duo{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px}
+  .sq{padding:14px}
+  .sq .kicker,.sq .fecha{top:14px}
+  .sq .kicker{left:14px}
+  .sq .fecha{right:14px}
+  .article-body{font-size:18.5px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#home">Marc Balastegui</a>
+  <nav class="nav">
+    <button data-go="home">Inicio</button>
+    <button data-go="sobre">Sobre mí</button>
+    <button data-go="proyectos">Proyectos</button>
+    <button data-go="notas">Notas</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= INICIO ================= -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div>
+        <span class="pill"><span class="dot"></span>Buscando prácticas de soporte IT</span>
+        <h1>Levanto servidores, y luego me quedo mirando películas hasta tarde.</h1>
+        <p class="lead">Marc, 18 años, segundo de ASIX en Barcelona. Esta página es mitad lo que construyo y mitad lo que me da vueltas.</p>
+      </div>
+      <span class="portrait">
+        <img src="imagenes/retrato.jpg" alt="Retrato de Marc" onerror="this.remove()">
+      </span>
+    </div>
+
+    <span class="eyebrow">Por dónde empezar</span>
+    <div class="doors">
+      <button class="door" data-go="proyectos">
+        <h3>Proyectos</h3>
+        <p>Lo que he construido y sigue funcionando.</p>
+      </button>
+      <button class="door" data-go="notas">
+        <h3>Notas</h3>
+        <p>Cine, música y manías, sin ninguna estructura.</p>
+      </button>
+      <button class="door" data-go="sobre">
+        <h3>Sobre mí</h3>
+        <p>Quién soy y cómo llegué hasta aquí.</p>
+      </button>
+    </div>
+
+    <span class="eyebrow">Lo último que he escrito</span>
+    <div class="grid" id="grid-home"></div>
+  </section>
+
+  <!-- ================= SOBRE MI ================= -->
+  <section class="view" id="view-sobre">
+    <span class="eyebrow">Sobre mí</span>
+    <h1>Un sistema es un sitio donde las decisiones se notan.</h1>
+    <div class="rule"></div>
+    <div class="split">
+      <div>
+        <p class="lead">O responde el ping o no responde. Esa claridad me enganchó y por eso acabé en sistemas y no en otra cosa.</p>
+        <p>Estudio segundo de ASIX en Barcelona: redes, servidores, bases de datos y todo lo que se rompe a las tres de la tarde de un viernes. Me gusta más la parte de arreglar que la de configurar.</p>
+        <p>Fuera de clase construyo cosas por mi cuenta. Una app para guardar lo que veo y escucho, un asistente que me avisa por Telegram de lo que tengo pendiente, y un canal de vídeos que empezó por gusto. Casi todo nace igual, de una tarea repetitiva que me da pereza hacer a mano.</p>
+        <p>El resto del tiempo lo ocupan el cine, la música de los ochenta y una historia que llevo años escribiendo y que no pienso explicar aquí.</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <div><dt>Dónde</dt><dd>L'Hospitalet de Llobregat, Barcelona</dd></div>
+          <div><dt>Estudios</dt><dd>CFGS ASIX, segundo curso</dd></div>
+          <div><dt>Toco</dt><dd>Linux, Windows Server, MySQL, Python, redes Cisco, AWS, Proxmox</dd></div>
+          <div><dt>Idiomas</dt><dd>Catalán, castellano, inglés B2</dd></div>
+          <div><dt>Ahora</dt><dd>Prácticas de Service Desk</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:tucorreo@ejemplo.com">tucorreo@ejemplo.com</a></dd></div>
+          <div><dt>GitHub</dt><dd><a href="#">@tuusuario</a></dd></div>
+          <div><dt>LinkedIn</dt><dd><a href="#">/in/tuperfil</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROYECTOS ================= -->
+  <section class="view" id="view-proyectos">
+    <span class="eyebrow">Proyectos</span>
+    <h1>Cosas que he construido y siguen en pie.</h1>
+    <p class="lead" style="margin-bottom:44px">Ordenados por lo reciente que sea el último cambio, no por lo bien que quedan en un currículum.</p>
+    <div class="rows" id="rows-proyectos"></div>
+  </section>
+
+  <!-- ================= NOTAS ================= -->
+  <section class="view" id="view-notas">
+    <span class="eyebrow">Notas</span>
+    <h1>Un sitio para pensar en voz alta.</h1>
+    <p class="aviso">Esto no es una revista. No soy periodista, no sigo ninguna estructura y escribo sobre lo que me haya dado vueltas esa semana. Si algo te parece mal, seguramente tengas razón.</p>
+    <div class="grid" id="grid-notas"></div>
+  </section>
+
+  <!-- ================= ARTICULO ================= -->
+  <section class="view" id="view-nota">
+    <button class="back" data-go="notas">← Volver a Notas</button>
+    <div class="article-head">
+      <span class="eyebrow" id="nota-tipo" style="padding-top:0"></span>
+      <h1 id="nota-titulo"></h1>
+      <div class="byline" id="nota-byline"></div>
+    </div>
+    <div class="article-body" id="nota-cuerpo"></div>
+    <div class="endnote" id="nota-endnote"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Hecho a mano. Sin plantilla, sin cookies, sin analítica.</span>
+  <span>© <span id="year"></span> Marc Balastegui</span>
+</footer>
+
+<script>
+/* =========================================================
+   FOTOS
+   Crea una carpeta "imagenes" al lado de este archivo y usa
+   rutas tipo imagenes/loquesea.jpg
+   Si una foto todavía no existe, el hueco se queda limpio.
+   ========================================================= */
+
+/* ---------------- PROYECTOS ----------------
+   foto: la imagen que va a la izquierda de cada proyecto
+--------------------------------------------- */
+const PROYECTOS = [
+  { titulo:"BitRevs", year:"2026", url:"#", foto:"imagenes/bitrevs.jpg",
+    desc:"Una app donde apunto y puntúo todo lo que veo y escucho. Sin cuentas y sin nube: los datos viven en tu navegador.",
+    tags:["JavaScript","IndexedDB","En desarrollo"] },
+  { titulo:"Gress", year:"2026", url:"#", foto:"imagenes/gress.jpg",
+    desc:"Un asistente que me avisa por Telegram de lo que tengo pendiente antes de que se me olvide. Corre solo en un servidor pequeño.",
+    tags:["Python","Telegram","Servidor propio"] },
+  { titulo:"Homelab con Proxmox", year:"2026", url:"#", foto:"imagenes/homelab.jpg",
+    desc:"El PC de casa convertido en servidor. Máquinas virtuales, contenedores y un sitio donde romper cosas sin consecuencias.",
+    tags:["Proxmox","Virtualización","Linux"] },
+  { titulo:"InnovateTech", year:"2025", url:"#", foto:"imagenes/innovatech.jpg",
+    desc:"Base de datos desplegada en un servidor real: 18 tablas, roles, disparadores, copias automáticas y avisos de seguridad.",
+    tags:["AWS EC2","MySQL 8","Bash"] },
+  { titulo:"Medular", year:"2025", url:"#", foto:"imagenes/medular.jpg",
+    desc:"Canal de vídeos cortos. Lo empecé por gusto y ha acabado siendo un curso acelerado de qué se comparte y qué no.",
+    tags:["Vídeo corto","Edición"] }
+];
+
+/* ---------------- NOTAS ----------------
+   Bloques del cuerpo:
+     {p:"párrafo"}
+     {h:"subtítulo"}
+     {cita:"frase destacada"}
+     {foto:"imagenes/x.jpg", pie:"texto", ancha:true}
+     {duo:["imagenes/a.jpg","imagenes/b.jpg"], pie:"texto"}
+------------------------------------------ */
+const NOTAS = [
+  {
+    slug:"venganza-coreana",
+    titulo:"El cine coreano de venganza no va sobre la venganza",
+    subtitulo:"Llevo meses viendo thrillers y creo que los estaba leyendo mal.",
+    fecha:"12 AGO 26",
+    tipo:"Cine",
+    lectura:"6 min",
+    portada:"imagenes/venganza.jpg",
+    cuerpo:[
+      {foto:"imagenes/venganza-hero.jpg", pie:"Las fotos anchas se salen del texto y respiran mejor.", ancha:true},
+      {p:"Llevo meses viendo thrillers coreanos y creo que los estaba leyendo mal. Los tenía guardados como películas de venganza, y no lo son. Son películas sobre lo que le pasa a alguien cuando decide dedicar su vida entera a una sola cosa."},
+      {p:"En I Saw the Devil el protagonista gana. Ese es el detalle que casi nadie subraya. Consigue exactamente lo que quería, con creces, y la película se encarga de que veas el precio en su cara durante los últimos veinte minutos. No hay lección final. Solo alguien que ya no tiene a dónde volver."},
+      {cita:"Te sientan al lado y te dejan mirar."},
+      {h:"La ausencia de moraleja"},
+      {p:"El cine occidental normalmente te avisa: no lo hagas, te destruirá. Aquí no hay aviso. La cámara se queda quieta y tú decides qué hacer con lo que has visto, que es una responsabilidad rara de repartir en una sala de cine."},
+      {duo:["imagenes/plano-1.jpg","imagenes/plano-2.jpg"], pie:"Dos planos que hacen exactamente lo mismo con quince años de diferencia."},
+      {p:"Hay una cosa técnica que me llama la atención y es cuánto duran los planos. En cuanto empieza a incomodar, la mayoría de directores cortan. Aquí aguantan tres segundos más. Esos tres segundos son toda la película."},
+      {p:"Puede que dentro de un año piense que esto es una teoría que me inventé para ordenar películas que no tienen nada que ver entre ellas. De momento me sirve."}
+    ],
+    cierre:"Escrito de una sentada un martes por la noche. Si me recomiendas algo del estilo, lo veo."
+  },
+  {
+    slug:"scorpions",
+    titulo:"Scorpions tiene mejores baladas que himnos",
+    subtitulo:"Y las dos canciones que todo el mundo conoce son las menos interesantes.",
+    fecha:"3 AGO 26",
+    tipo:"Música",
+    lectura:"3 min",
+    portada:"imagenes/scorpions.jpg",
+    cuerpo:[
+      {p:"Todo el mundo conoce dos canciones suyas y las dos son las menos interesantes de su catálogo. La banda tiene una faceta melódica de los ochenta que es donde de verdad se les ve la mano."},
+      {p:"Es una cuestión de contención. Cuando van a por el estadio suenan como cualquier otra banda que va a por el estadio. Cuando bajan el volumen aparecen unas melodías vocales rarísimas que no vienen de ningún sitio obvio."},
+      {foto:"imagenes/vinilo.jpg", pie:"El disco por el que empezaría, si tuviera que elegir uno."},
+      {p:"No tengo argumentos técnicos para esto. Es simplemente lo que me pasa al escucharlas, y ya está."}
+    ],
+    cierre:"Diez minutos de escritura y ninguna comprobación. Puro gusto personal."
+  },
+  {
+    slug:"modding",
+    titulo:"Aprendí más de sistemas modeando Minecraft que en todo primero",
+    subtitulo:"Leía trazas de error años antes de saber que eso tenía nombre.",
+    fecha:"21 JUL 26",
+    tipo:"Sistemas",
+    lectura:"4 min",
+    portada:"imagenes/modding.jpg",
+    cuerpo:[
+      {p:"Antes de saber qué era un registro de errores, ya me había pasado tardes leyendo trazas de Java para averiguar qué mod rompía el arranque. No sabía que eso tenía nombre. Solo quería que el juego abriera."},
+      {h:"Tres cosas que se me quedaron"},
+      {p:"Que los conflictos casi siempre son de versiones. Que hay que cambiar una variable cada vez o no te enteras de nada. Y que el error de verdad suele estar veinte líneas por encima del que te asusta."},
+      {foto:"imagenes/carpeta-mods.jpg", pie:"La carpeta de mods de 2019. Un desastre bien documentado."},
+      {p:"No lo pongo en el currículum porque queda raro. Pero es literalmente donde empecé."}
+    ],
+    cierre:"Escrito después de reinstalar un servidor por tercera vez en una semana."
+  },
+  {
+    slug:"calendario-papel",
+    titulo:"Sigo usando un calendario de papel y no pienso dejarlo",
+    subtitulo:"Tengo el móvil lleno de apps y acabo apuntándolo todo a mano.",
+    fecha:"9 JUL 26",
+    tipo:"Manías",
+    lectura:"2 min",
+    portada:"imagenes/calendario.jpg",
+    cuerpo:[
+      {p:"Tengo calendario en el móvil, recordatorios y hasta un bot que me avisa. Y aun así lo que de verdad me organiza es una hoja con cuadrados que veo entera de un vistazo."},
+      {p:"Creo que es por el esfuerzo. Escribir algo a mano cuesta lo suficiente como para pensar si merece la pena apuntarlo. En el móvil apunto todo y por eso no me creo nada de lo que apunto."},
+      {p:"No es una teoría de productividad. Es solo lo que me funciona a mí."}
+    ],
+    cierre:"Escrito en el metro, que es donde me salen las ideas tontas."
+  }
+];
+
+/* ---------------- render ---------------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function cuadrado(n){
+  return `<button class="sq" data-nota="${esc(n.slug)}">
+    <img class="bgimg" src="${esc(n.portada)}" alt="" onerror="this.remove()">
+    <span class="veil"></span>
+    <span class="kicker">${esc(n.tipo)}</span>
+    <span class="fecha">${esc(n.fecha)}</span>
+    <h3>${esc(n.titulo)}</h3>
+    <p class="sub">${esc(n.subtitulo)}</p>
+  </button>`;
+}
+
+$("#grid-notas").innerHTML = NOTAS.map(cuadrado).join("");
+$("#grid-home").innerHTML = NOTAS.slice(0,4).map(cuadrado).join("");
+
+$("#rows-proyectos").innerHTML = PROYECTOS.map(p=>`
+  <a class="row" href="${esc(p.url)}" ${p.url.indexOf("http")===0?'target="_blank" rel="noopener"':""}>
+    <span class="thumb">
+      <span class="hint">Imagen</span>
+      <img src="${esc(p.foto)}" alt="" onerror="this.remove()">
+    </span>
+    <span>
+      <span class="row-top"><h2>${esc(p.titulo)}</h2><span class="year">${esc(p.year)}</span></span>
+      <p>${esc(p.desc)}</p>
+      <span class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</span>
+    </span>
+  </a>`).join("");
+
+function bloque(b){
+  if(b.p) return `<p>${esc(b.p)}</p>`;
+  if(b.h) return `<h2>${esc(b.h)}</h2>`;
+  if(b.cita) return `<blockquote>${esc(b.cita)}</blockquote>`;
+  if(b.duo) return `<figure><span class="duo">${b.duo.map(src=>
+      `<span class="frame"><img src="${esc(src)}" alt="" onerror="this.remove()"></span>`).join("")}</span>
+      ${b.pie?`<figcaption>${esc(b.pie)}</figcaption>`:""}</figure>`;
+  if(b.foto) return `<figure class="${b.ancha?"wide":""}">
+      <span class="frame" style="${b.ancha?"aspect-ratio:16/9;":""}">
+        <img src="${esc(b.foto)}" alt="" onerror="this.remove()"></span>
+      ${b.pie?`<figcaption>${esc(b.pie)}</figcaption>`:""}</figure>`;
+  return "";
+}
+
+function abrirNota(slug){
+  const n = NOTAS.find(x=>x.slug===slug);
+  if(!n){ location.hash="notas"; return; }
+  $("#nota-tipo").textContent = n.tipo;
+  $("#nota-titulo").textContent = n.titulo;
+  $("#nota-byline").innerHTML =
+    `<span class="mark">Marc Balastegui</span><span>${esc(n.fecha)}</span><span>${esc(n.lectura)} de lectura</span>`;
+  $("#nota-cuerpo").innerHTML = n.cuerpo.map(bloque).join("");
+  $("#nota-endnote").textContent = n.cierre || "";
+  mostrar("nota");
+}
+
+function mostrar(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("is-active", v.id==="view-"+id));
+  document.querySelectorAll(".nav button").forEach(b=>{
+    const on = b.dataset.go===id || (id==="nota" && b.dataset.go==="notas");
+    b.setAttribute("aria-current", on?"true":"false");
+  });
+  window.scrollTo(0,0);
+}
+
+function rutear(){
+  const h = location.hash.replace("#","");
+  if(h.indexOf("notas/")===0) return abrirNota(h.slice(6));
+  mostrar(["home","sobre","proyectos","notas"].indexOf(h)>=0 ? h : "home");
+}
+
+document.addEventListener("click", e=>{
+  const go = e.target.closest("[data-go]");
+  if(go){ e.preventDefault(); location.hash = go.dataset.go; return; }
+  const nota = e.target.closest("[data-nota]");
+  if(nota){ location.hash = "notas/"+nota.dataset.nota; }
+});
+
+window.addEventListener("hashchange", rutear);
+$("#year").textContent = new Date().getFullYear();
+rutear();
+</script>
+</body>
+</html>
