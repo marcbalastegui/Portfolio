@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BitRevs · Marc Balastegui</title>
+<meta name="description" content="Un archivo personal de todo lo que escucho y veo, puntuado canción a canción.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Karla:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300..400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF;
+  --bg-2:#F7F7F6;
+  --ink:#121317;
+  --ink-soft:#6A6E76;
+  --line:#E4E4E1;
+  --line-strong:#15161A;
+  --accent:#1C2B46;
+  --display:"Bodoni Moda",Didot,Georgia,serif;
+  --ui:"Karla","Helvetica Neue",Arial,sans-serif;
+  --read:"Newsreader",Georgia,serif;
+  --gutter:clamp(20px,5vw,76px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--ui);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--ink);color:#fff}
+:focus-visible{outline:1.5px solid var(--accent);outline-offset:4px}
+
+.topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px var(--gutter);
+  background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:var(--display);font-optical-sizing:auto;
+  font-weight:500;font-size:21px;text-decoration:none;color:inherit;line-height:1;
+}
+.topbar nav{display:flex;gap:2px}
+.topbar nav a{
+  font-size:13px;font-weight:500;color:var(--ink-soft);
+  padding:8px 12px;text-decoration:none;transition:color .2s ease;
+}
+.topbar nav a:hover{color:var(--ink)}
+
+main{padding:0 var(--gutter) 120px;max-width:1180px;margin:0 auto}
+
+h1{
+  font-family:var(--display);font-optical-sizing:auto;font-weight:500;
+  font-size:clamp(40px,6.4vw,78px);line-height:1.02;letter-spacing:-.018em;
+  margin:0 0 22px;text-wrap:balance;
+}
+h2{
+  font-family:var(--display);font-optical-sizing:auto;font-weight:500;
+  font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.01em;margin:0 0 14px;
+}
+h3{
+  font-family:var(--display);font-optical-sizing:auto;font-weight:500;
+  font-size:21px;line-height:1.2;margin:0 0 7px;
+}
+p{margin:0 0 18px;max-width:64ch}
+.eyebrow{
+  display:block;font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-soft);margin:0 0 22px;
+}
+
+/* ---------- portada ---------- */
+.hero{padding-top:52px}
+.hero .lead{
+  font-family:var(--read);font-weight:300;
+  font-size:clamp(19px,2.3vw,25px);line-height:1.5;color:var(--ink-soft);
+  max-width:40ch;margin:0 0 34px;
+}
+.hero-cover{
+  display:block;position:relative;overflow:hidden;
+  aspect-ratio:16/9;background:var(--bg-2);border:1px solid var(--line);
+  margin-bottom:0;
+}
+.hero-cover img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.ph{
+  position:absolute;inset:0;z-index:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  text-align:center;padding:20px;
+}
+.ph b{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A9ACB1}
+.ph span{font-size:13px;color:#B9BBBE;max-width:38ch;line-height:1.4}
+
+/* ---------- ficha ---------- */
+.spec{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:0;border-top:1px solid var(--line-strong);margin:0 0 72px;
+}
+.spec div{padding:16px 20px 16px 0;border-bottom:1px solid var(--line)}
+.spec dt{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+.spec dd{margin:0;font-size:14.5px;line-height:1.4}
+.spec a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.spec a:hover{border-bottom-color:var(--ink)}
+
+/* ---------- prosa ---------- */
+.prose{max-width:68ch;font-family:var(--read);font-weight:300;font-size:19px;line-height:1.72}
+.prose p{max-width:none}
+.prose strong{font-weight:400;color:var(--ink);box-shadow:inset 0 -.42em 0 rgba(28,43,70,.09)}
+section{padding-top:76px}
+section > .eyebrow{padding-top:0}
+
+blockquote{
+  margin:46px auto;max-width:24ch;padding:0;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(23px,3.2vw,32px);line-height:1.22;text-align:center;
+}
+
+/* ---------- figuras ---------- */
+figure{margin:44px 0;max-width:none}
+figure.wide{width:min(94vw,1120px);margin-left:50%;transform:translateX(-50%)}
+.frame{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg-2);border:1px solid var(--line)}
+.frame.tall{aspect-ratio:4/5}
+.frame.square{aspect-ratio:1/1}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+figcaption{
+  font-family:var(--ui);font-size:12.5px;color:var(--ink-soft);
+  margin-top:10px;line-height:1.5;max-width:52ch;
+}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ---------- lista de funciones ---------- */
+.feats{border-top:1px solid var(--line-strong);margin:30px 0 0}
+.feat{
+  display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);
+  gap:clamp(16px,3vw,40px);padding:22px 0;border-bottom:1px solid var(--line);
+}
+.feat h3{margin:0}
+.feat p{margin:0;font-size:15.5px;color:var(--ink-soft);font-family:var(--ui)}
+.feat p + p{margin-top:8px}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);padding:4px 10px;color:var(--ink-soft)}
+
+.endnote{
+  max-width:68ch;margin:72px 0 0;padding-top:20px;border-top:1px solid var(--line);
+  font-size:13.5px;color:var(--ink-soft);
+}
+footer{
+  padding:24px var(--gutter) 46px;font-size:12px;color:var(--ink-soft);
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
+  max-width:1180px;margin:0 auto;border-top:1px solid var(--line);
+}
+@media (max-width:820px){
+  body{font-size:16px}
+  .prose{font-size:18px}
+  .feat{grid-template-columns:1fr;gap:6px}
+  .duo{grid-template-columns:1fr}
+  .hero-cover{aspect-ratio:4/3}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">Marc Balastegui</a>
+  <nav>
+    <a href="index.html#proyectos">← Proyectos</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== PORTADA ===================== -->
+  <div class="hero">
+    <span class="eyebrow">Proyecto · 2025–2026</span>
+    <h1>BitRevs</h1>
+    <p class="lead">Un archivo de todo lo que escucho y veo, puntuado canción a canción.</p>
+
+    <figure class="wide" style="margin:0 0 44px">
+      <span class="hero-cover">
+        <span class="ph"><b>Portada</b><span>Rejilla de álbumes de la página Música, con las portadas y sus notas</span></span>
+        <img src="imagenes/bitrevs/portada.jpg" alt="Rejilla de álbumes puntuados en BitRevs" onerror="this.remove()">
+      </span>
+    </figure>
+  </div>
+
+  <dl class="spec">
+    <div><dt>Qué es</dt><dd>Web personal de reseñas de música, cine y series</dd></div>
+    <div><dt>Estado</dt><dd>En uso diario, en desarrollo continuo</dd></div>
+    <div><dt>Stack</dt><dd>JavaScript sin framework, Firebase Auth, Firestore, API de Spotify</dd></div>
+    <div><dt>Despliegue</dt><dd>GitHub Pages</dd></div>
+    <div><dt>Enlace</dt><dd><a href="#" target="_blank" rel="noopener">Abrir BitRevs</a></dd></div>
+  </dl>
+
+  <!-- ===================== EL PORQUÉ ===================== -->
+  <section>
+    <span class="eyebrow">Por qué existe</span>
+    <h2>Puntuar un disco entero con un solo número es mentir un poco.</h2>
+    <div class="prose">
+      <p>Llevaba años con la misma costumbre: acababa un disco, me quedaba con dos o tres canciones y se me olvidaba el resto. Al cabo de un año no recordaba si ese álbum me había gustado de verdad o solo me había gustado el single.</p>
+      <p>Las apps que probé daban una nota al álbum y poco más. Yo quería lo contrario: <strong>puntuar cada canción por separado</strong> y que la nota del disco saliera de ahí, no al revés. Así la media dice algo. Un álbum con tres joyas y ocho rellenos deja de parecerse a uno que es bueno de principio a fin.</p>
+      <p>Lo mismo con el cine. Quería poder volver a una película meses después y encontrarme la frase que me marcó y el fotograma que guardé, no solo un número del uno al diez.</p>
+      <p>Así que lo construí. Primero fue una tabla de álbumes, y poco a poco se ha convertido en un archivo personal con mi historia de escucha dentro.</p>
+    </div>
+  </section>
+
+  <!-- ===================== EL NÚCLEO ===================== -->
+  <section>
+    <span class="eyebrow">El núcleo</span>
+    <h2>La reseña empieza en la canción, no en el disco.</h2>
+    <div class="prose">
+      <p>Cuando añado un álbum busco el disco en Spotify y la app rellena sola la portada, el artista, el año, el tipo de lanzamiento y el tracklist completo. Lo que antes eran diez minutos escribiendo títulos a mano ahora son dos clics.</p>
+      <p>A partir de ahí el trabajo es escuchar. Cada canción tiene su nota, y cada nota deja rastro: si dentro de seis meses cambio de opinión sobre un tema, la app <strong>guarda el historial</strong> y puedo ver cómo ha subido o bajado con el tiempo. Los interludios se marcan como tales y no cuentan para la media, porque puntuar un interludio de cuarenta segundos como si fuera una canción distorsiona el disco entero.</p>
+      <p>También hay sitio para los créditos: quién produjo, quién escribió, quién aparece como invitado. Esa información luego alimenta las estadísticas de artista, así que un productor o un colaborador acumula su propio historial sin que yo tenga que llevar la cuenta.</p>
+    </div>
+
+    <figure>
+      <span class="frame">
+        <span class="ph"><b>Captura</b><span>Página de un álbum: portada grande, tracklist con la nota de cada canción y la media calculada</span></span>
+        <img src="imagenes/bitrevs/album.jpg" alt="Página de álbum con el tracklist puntuado" onerror="this.remove()">
+      </span>
+      <figcaption>La media del disco no se escribe: sale de las canciones.</figcaption>
+    </figure>
+
+    <figure>
+      <span class="duo">
+        <span class="frame tall">
+          <span class="ph"><b>Captura</b><span>Buscador de Spotify dentro del modal de nueva reseña</span></span>
+          <img src="imagenes/bitrevs/spotify.jpg" alt="Buscador de Spotify" onerror="this.remove()">
+        </span>
+        <span class="frame tall">
+          <span class="ph"><b>Captura</b><span>Historial de notas de una canción a lo largo del tiempo</span></span>
+          <img src="imagenes/bitrevs/historial.jpg" alt="Historial de notas de una canción" onerror="this.remove()">
+        </span>
+      </span>
+      <figcaption>Izquierda: el álbum entra desde Spotify con tracklist incluido. Derecha: cómo ha cambiado una nota desde la primera escucha.</figcaption>
+    </figure>
+  </section>
+
+  <blockquote>Lo interesante no es la nota. Es ver cómo cambia.</blockquote>
+
+  <!-- ===================== QUÉ TIENE DENTRO ===================== -->
+  <section>
+    <span class="eyebrow">Qué tiene dentro</span>
+    <h2>Diez años de escucha, ordenados de todas las formas posibles.</h2>
+    <div class="prose">
+      <p>Cada dato que entra se reutiliza en varios sitios. Una canción puntuada mueve la media del álbum, la del artista, la del género y el ranking global, todo a la vez. Estas son las secciones que han ido saliendo de ahí.</p>
+    </div>
+
+    <div class="feats">
+      <div class="feat">
+        <h3>Música</h3>
+        <div>
+          <p>Todos los álbumes en rejilla, con filtros por artista, título, año, nota y género, y un interruptor para separar álbumes de sencillos.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Películas y series</h3>
+        <div>
+          <p>Fichas con director, duración, género y país. Cada una tiene una sección de escenas donde guardo frases con la tipografía que les pega y fotogramas con el subtítulo encima, como si fuera una captura de la propia película.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Artistas</h3>
+        <div>
+          <p>Página propia con banner, foto y estadísticas calculadas: media de sus canciones, discografía ordenada y sus mejores temas. Las colaboraciones cuentan, así que un artista con tres featurings tiene su ficha aunque no tenga ningún álbum mío.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Top</h3>
+        <div>
+          <p>Ranking de canciones, álbumes, películas y artistas. Guarda una foto del ranking cada día, así que al lado de cada posición se ve si ha subido, bajado o se mantiene desde ayer. Es lo más parecido a una lista de éxitos personal.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Wrapped</h3>
+        <div>
+          <p>Resumen anual: media global, canciones puntuadas, mejor y peor álbum, artista y género favoritos, director preferido, país más visto, distribución de notas y una gráfica de álbumes por mes.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Colecciones y listas</h3>
+        <div>
+          <p>Agrupaciones temáticas con portada de collage automática, color propio y banner. Cada elemento puede mostrarse en un formato distinto dentro de la misma colección: solo portada, portada con título, ficha completa u horizontal.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Explorar</h3>
+        <div>
+          <p>Páginas de género musical, género cinematográfico, director y país, cada una con sus propias estadísticas. Sirve para preguntas que no sabía que quería responder, como qué nota media le pongo al cine coreano.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Comparador</h3>
+        <div>
+          <p>Dos artistas o dos álbumes enfrentados por sus números. Nació de una discusión y se quedó.</p>
+        </div>
+      </div>
+      <div class="feat">
+        <h3>Línea de tiempo</h3>
+        <div>
+          <p>Todo lo puntuado en orden cronológico, agrupado por año y mes, filtrable por tipo. Es la parte que más uso y la que menos pensaba usar.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="wide">
+      <span class="frame">
+        <span class="ph"><b>Captura</b><span>Wrapped completo, con las tarjetas de estadísticas y la gráfica de álbumes por mes</span></span>
+        <img src="imagenes/bitrevs/wrapped.jpg" alt="Página de Wrapped con estadísticas anuales" onerror="this.remove()">
+      </span>
+      <figcaption>El Wrapped sale entero de los datos que ya hay. No hay nada que rellenar a mano.</figcaption>
+    </figure>
+
+    <figure>
+      <span class="duo">
+        <span class="frame square">
+          <span class="ph"><b>Captura</b><span>Top de canciones con las flechas de subida y bajada</span></span>
+          <img src="imagenes/bitrevs/top.jpg" alt="Ranking de canciones" onerror="this.remove()">
+        </span>
+        <span class="frame square">
+          <span class="ph"><b>Captura</b><span>Página de artista con banner, foto y estadísticas</span></span>
+          <img src="imagenes/bitrevs/artista.jpg" alt="Página de artista" onerror="this.remove()">
+        </span>
+      </span>
+      <figcaption>El ranking se compara consigo mismo cada día. La ficha de artista se calcula sola.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== BAJO EL CAPÓ ===================== -->
+  <section>
+    <span class="eyebrow">Bajo el capó</span>
+    <h2>Sin framework, y con una mudanza de base de datos por el medio.</h2>
+    <div class="prose">
+      <p>Todo es HTML, CSS y JavaScript a pelo. Ningún framework, ninguna compilación, ningún paso de build: se abre el archivo y funciona. Lo elegí así por terquedad al principio y lo mantengo por convicción, porque me obliga a entender qué hace cada línea en vez de delegarlo.</p>
+      <p>La primera versión guardaba todo en <strong>IndexedDB</strong>, la base de datos del propio navegador. Funcionaba bien hasta el día que quise consultar mis notas desde el móvil y me di cuenta del problema: los datos vivían en un solo ordenador y en un solo navegador. Si lo borraba, desaparecían.</p>
+      <p>La segunda versión los movió a <strong>Firestore</strong>, con <strong>Firebase Auth</strong> para la sesión. Cada usuario tiene su propio árbol de datos y las notas me siguen a cualquier dispositivo. La migración fue su propia página: leer de IndexedDB, limpiar los campos vacíos que Firestore rechaza, y escribirlo todo arriba sin perder ningún identificador por el camino.</p>
+      <p>Encima va la <strong>API de Spotify</strong>, con su propio flujo de autenticación, para buscar discos y traer metadatos y géneros. Y por debajo, detalles que no se ven pero que marcan la diferencia al usarlo: diálogos propios en lugar de los <code>alert</code> del navegador, iconos en SVG con la paleta del sitio, y la misma gramática visual en todas las páginas.</p>
+    </div>
+
+    <div class="tags">
+      <span class="tag">JavaScript</span>
+      <span class="tag">Firebase Auth</span>
+      <span class="tag">Firestore</span>
+      <span class="tag">API de Spotify</span>
+      <span class="tag">IndexedDB</span>
+      <span class="tag">GitHub Pages</span>
+    </div>
+  </section>
+
+  <!-- ===================== LO QUE APRENDÍ ===================== -->
+  <section>
+    <span class="eyebrow">Lo que aprendí</span>
+    <h2>Tres cosas que no esperaba.</h2>
+    <div class="prose">
+      <p><strong>Migrar datos da más miedo que escribirlos.</strong> Crear la base de datos fue una tarde. Mover años de notas de un sitio a otro sin perder nada me llevó bastante más, y fue donde de verdad entendí por qué en sistemas se insiste tanto con las copias de seguridad antes de tocar nada.</p>
+      <p><strong>El modelo de datos decide lo que podrás hacer dentro de un año.</strong> Guardar los créditos de cada canción parecía un capricho. Gracias a eso las estadísticas de artista salieron casi solas meses después. Lo que no guardé a tiempo son los años que tardé en volver a reconstruir.</p>
+      <p><strong>Una app personal se usa de verdad o no se usa.</strong> Las secciones que pensé que serían el centro apenas las abro. La línea de tiempo, que añadí de relleno, es la que más uso. No hay forma de saberlo sin construirla y vivir con ella unas semanas.</p>
+    </div>
+
+    <figure>
+      <span class="frame">
+        <span class="ph"><b>Captura</b><span>Línea de tiempo de la home, agrupada por año y mes</span></span>
+        <img src="imagenes/bitrevs/timeline.jpg" alt="Línea de tiempo de reseñas" onerror="this.remove()">
+      </span>
+      <figcaption>La sección que añadí de relleno y acabó siendo la portada de mi propia memoria.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===================== AHORA ===================== -->
+  <section>
+    <span class="eyebrow">Ahora mismo</span>
+    <h2>Sigue creciendo cada semana.</h2>
+    <div class="prose">
+      <p>Lo uso casi a diario, que para un proyecto personal es el único indicador que vale. Lo siguiente en la lista es un modo galería para las portadas, afinar el ranking para que pesen más las escuchas recientes, y una versión del Wrapped que se pueda compartir como imagen.</p>
+      <p>No está pensado para que lo use nadie más. Pero si alguien quiere ver cómo se construye un archivo personal que aguanta años de datos, el código está abierto.</p>
+    </div>
+
+    <p class="endnote">BitRevs forma parte del MarcVerse, el conjunto de proyectos propios donde acabo metiendo todo lo que colecciono.</p>
+  </section>
+
+</main>
+
+<footer>
+  <span>Hecho a mano. Sin plantilla, sin cookies, sin analítica.</span>
+  <span>© <span id="year"></span> Marc Balastegui</span>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
