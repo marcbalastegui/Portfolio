@@ -118,11 +118,13 @@ blockquote{
 
 /* ---------- figuras ---------- */
 figure{margin:44px 0;max-width:none}
-figure.wide{width:min(94vw,1120px);margin-left:50%;transform:translateX(-50%)}
+figure.wide{width:100%}
 .frame{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg-2);border:1px solid var(--line)}
 .frame.tall{aspect-ratio:4/5}
 .frame.square{aspect-ratio:1/1}
 .frame img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.frame:has(img),.hero-cover:has(img){aspect-ratio:auto}
+.frame:has(img) img,.hero-cover:has(img) img{height:auto;object-fit:contain}
 figcaption{
   font-family:var(--ui);font-size:12.5px;color:var(--ink-soft);
   margin-top:10px;line-height:1.5;max-width:52ch;
@@ -179,7 +181,7 @@ footer{
     <h1>BitRevs</h1>
     <p class="lead">Un archivo de todo lo que escucho y veo, puntuado canción a canción.</p>
 
-    <figure class="wide" style="margin:0 0 44px">
+    <figure style="margin:0 0 44px">
       <span class="hero-cover">
         <span class="ph"><b>Portada</b><span>Rejilla de álbumes de la página Música, con las portadas y sus notas</span></span>
         <img src="imagenes/bitrevs/portada.jpg" alt="Rejilla de álbumes puntuados en BitRevs" onerror="this.remove()">
@@ -191,8 +193,9 @@ footer{
     <div><dt>Qué es</dt><dd>Web personal de reseñas de música, cine y series</dd></div>
     <div><dt>Estado</dt><dd>En uso diario, en desarrollo continuo</dd></div>
     <div><dt>Stack</dt><dd>JavaScript sin framework, Firebase Auth, Firestore, API de Spotify</dd></div>
+    <div><dt>Dentro</dt><dd>102 álbumes, 1.361 canciones, 81 películas y series</dd></div>
     <div><dt>Despliegue</dt><dd>GitHub Pages</dd></div>
-    <div><dt>Enlace</dt><dd><a href="#" target="_blank" rel="noopener">Abrir BitRevs</a></dd></div>
+    <div><dt>Enlace</dt><dd><a href="https://marcbalastegui.github.io/bit-revs/" target="_blank" rel="noopener">Abrir BitRevs</a></dd></div>
   </dl>
 
   <!-- ===================== EL PORQUÉ ===================== -->
@@ -203,7 +206,7 @@ footer{
       <p>Llevaba años con la misma costumbre: acababa un disco, me quedaba con dos o tres canciones y se me olvidaba el resto. Al cabo de un año no recordaba si ese álbum me había gustado de verdad o solo me había gustado el single.</p>
       <p>Las apps que probé daban una nota al álbum y poco más. Yo quería lo contrario: <strong>puntuar cada canción por separado</strong> y que la nota del disco saliera de ahí, no al revés. Así la media dice algo. Un álbum con tres joyas y ocho rellenos deja de parecerse a uno que es bueno de principio a fin.</p>
       <p>Lo mismo con el cine. Quería poder volver a una película meses después y encontrarme la frase que me marcó y el fotograma que guardé, no solo un número del uno al diez.</p>
-      <p>Así que lo construí. Primero fue una tabla de álbumes, y poco a poco se ha convertido en un archivo personal con mi historia de escucha dentro.</p>
+      <p>Así que lo construí. Primero fue una tabla de álbumes, y poco a poco se ha convertido en un archivo personal: hoy tiene 102 discos, 1.361 canciones puntuadas y 81 películas y series dentro.</p>
     </div>
   </section>
 
@@ -222,7 +225,7 @@ footer{
         <span class="ph"><b>Captura</b><span>Página de un álbum: portada grande, tracklist con la nota de cada canción y la media calculada</span></span>
         <img src="imagenes/bitrevs/album.jpg" alt="Página de álbum con el tracklist puntuado" onerror="this.remove()">
       </span>
-      <figcaption>La media del disco no se escribe: sale de las canciones.</figcaption>
+      <figcaption>MOTOMAMI, 6.9. La media del disco no se escribe: sale de sus canciones, que aquí van del 5.3 al 8.4.</figcaption>
     </figure>
 
     <figure>
@@ -245,7 +248,7 @@ footer{
   <!-- ===================== QUÉ TIENE DENTRO ===================== -->
   <section>
     <span class="eyebrow">Qué tiene dentro</span>
-    <h2>Diez años de escucha, ordenados de todas las formas posibles.</h2>
+    <h2>Mil trescientas canciones, ordenadas de todas las formas posibles.</h2>
     <div class="prose">
       <p>Cada dato que entra se reutiliza en varios sitios. Una canción puntuada mueve la media del álbum, la del artista, la del género y el ranking global, todo a la vez. Estas son las secciones que han ido saliendo de ahí.</p>
     </div>
@@ -312,21 +315,23 @@ footer{
         <span class="ph"><b>Captura</b><span>Wrapped completo, con las tarjetas de estadísticas y la gráfica de álbumes por mes</span></span>
         <img src="imagenes/bitrevs/wrapped.jpg" alt="Página de Wrapped con estadísticas anuales" onerror="this.remove()">
       </span>
-      <figcaption>El Wrapped sale entero de los datos que ya hay. No hay nada que rellenar a mano.</figcaption>
+      <figcaption>Media global 7.9 sobre 1.361 canciones. Todo sale de los datos que ya hay, sin rellenar nada a mano.</figcaption>
     </figure>
 
     <figure>
-      <span class="duo">
-        <span class="frame square">
-          <span class="ph"><b>Captura</b><span>Top de canciones con las flechas de subida y bajada</span></span>
-          <img src="imagenes/bitrevs/top.jpg" alt="Ranking de canciones" onerror="this.remove()">
-        </span>
-        <span class="frame square">
-          <span class="ph"><b>Captura</b><span>Página de artista con banner, foto y estadísticas</span></span>
-          <img src="imagenes/bitrevs/artista.jpg" alt="Página de artista" onerror="this.remove()">
-        </span>
+      <span class="frame">
+        <span class="ph"><b>Captura</b><span>Top de canciones con las flechas de subida y bajada</span></span>
+        <img src="imagenes/bitrevs/top.jpg" alt="Ranking de canciones" onerror="this.remove()">
       </span>
-      <figcaption>El ranking se compara consigo mismo cada día. La ficha de artista se calcula sola.</figcaption>
+      <figcaption>El Top 100 se compara consigo mismo cada día para saber qué ha subido y qué ha bajado.</figcaption>
+    </figure>
+
+    <figure>
+      <span class="frame">
+        <span class="ph"><b>Captura</b><span>Página de artista con banner, foto y estadísticas</span></span>
+        <img src="imagenes/bitrevs/artista.jpg" alt="Página de artista" onerror="this.remove()">
+      </span>
+      <figcaption>La ficha de artista se calcula sola a partir de las canciones puntuadas.</figcaption>
     </figure>
   </section>
 
